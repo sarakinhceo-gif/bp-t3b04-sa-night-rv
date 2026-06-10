@@ -1,214 +1,394 @@
-
 <!DOCTYPE html>
 <html lang="ko">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>인문 철학 지식 저널 및 아카이브</title>
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&family=Noto+Sans+KR:wght@300;400;700&display=swap" rel="stylesheet">
-  <style>
-    :root {
-      --bg-color: #ffffff;
-      --text-color: #0f172a;
-      --accent-color: #2563eb;
-      --muted-color: #64748b;
-      --border-color: #e2e8f0;
-      --font-swiss: 'Inter', 'Noto Sans KR', sans-serif;
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>미디어 조형물 너머 흐릿하게 퍼지는 밤의 안개</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Gowun+Batang:wght@400;700&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg-color: #07080c;
+            --main-gradient: linear-gradient(180deg, #07080c 0%, #13141f 100%);
+            --card-surface: rgba(255, 255, 255, 0.02);
+            --border-color: rgba(255, 255, 255, 0.04);
+            --text-high: #eae8f2;
+            --text-low: #8f8c9b;
+            --lilac: #c084fc;
+            --glow: rgba(192, 132, 252, 0.12);
+            --font-serif: 'Gowun Batang', serif;
+            --font-sans: 'Inter', sans-serif;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            background: var(--main-gradient);
+            color: var(--text-high);
+            font-family: var(--font-serif);
+            line-height: 1.85;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            overflow-x: hidden;
+        }
+
+        .container {
+            max-width: 660px;
+            margin: 0 auto;
+            padding: 90px 24px;
+            width: 100%;
+        }
+
+        .blog-header {
+            text-align: center;
+            margin-bottom: 50px;
+            position: relative;
+        }
+
+        .blog-header::after {
+            content: '';
+            display: block;
+            width: 35px;
+            height: 1px;
+            background: var(--lilac);
+            margin: 20px auto 0;
+            opacity: 0.4;
+            box-shadow: 0 0 6px var(--lilac);
+        }
+
+        .blog-sub {
+            font-size: 0.8rem;
+            text-transform: uppercase;
+            letter-spacing: 0.18em;
+            color: var(--lilac);
+            font-family: var(--font-sans);
+            font-weight: 500;
+            margin-bottom: 10px;
+        }
+
+        .blog-title {
+            font-size: 1.85rem;
+            font-weight: 700;
+            color: #ffffff;
+            line-height: 1.45;
+            letter-spacing: -0.01em;
+        }
+
+        .blog-date {
+            font-size: 0.85rem;
+            color: var(--text-low);
+            margin-top: 10px;
+            font-family: var(--font-sans);
+        }
+
+        .essay-content {
+            font-size: 1.08rem;
+            color: var(--text-high);
+            text-align: justify;
+        }
+
+        .essay-p {
+            margin-bottom: 28px;
+            text-indent: 10px;
+        }
+
+        .highlight-quote {
+            background: var(--card-surface);
+            border-left: 2px solid var(--lilac);
+            padding: 20px 24px;
+            margin: 36px 0;
+            border-radius: 0 8px 8px 0;
+            backdrop-filter: blur(8px);
+            border-top: 1px solid var(--border-color);
+            border-right: 1px solid var(--border-color);
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        .quote-inner {
+            font-style: italic;
+            color: #faf5ff;
+            font-size: 1.02rem;
+        }
+
+        .comments {
+            margin-top: 75px;
+            border-top: 1px solid var(--border-color);
+            padding-top: 40px;
+        }
+
+        .comments-label {
+            font-family: var(--font-sans);
+            font-size: 0.85rem;
+            color: var(--lilac);
+            letter-spacing: 0.12em;
+            margin-bottom: 22px;
+            text-transform: uppercase;
+        }
+
+        .comment-node {
+            background: var(--card-surface);
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            padding: 18px;
+            margin-bottom: 14px;
+            transition: all 0.3s ease;
+        }
+
+        .comment-node:hover {
+            border-color: rgba(192, 132, 252, 0.22);
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.25);
+        }
+
+        .comment-meta {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 10px;
+            font-family: var(--font-sans);
+            font-size: 0.8rem;
+        }
+
+        .author-name {
+            font-weight: 500;
+            color: #ffffff;
+        }
+
+        .post-time {
+            color: var(--text-low);
+        }
+
+        .stars {
+            color: var(--lilac);
+            font-size: 0.75rem;
+            margin-top: 2px;
+        }
+
+        .text-body {
+            font-size: 0.92rem;
+            color: var(--text-high);
+        }
+
+        .footer {
+            text-align: center;
+            padding: 35px 24px;
+            border-top: 1px solid var(--border-color);
+            font-family: var(--font-sans);
+            font-size: 0.75rem;
+            color: var(--text-low);
+            letter-spacing: 0.05em;
+        }
+
+        .lilac-glow {
+            position: absolute;
+            width: 250px;
+            height: 250px;
+            background: radial-gradient(circle, var(--glow) 0%, transparent 70%);
+            top: -80px;
+            left: 50%;
+            transform: translateX(-50%);
+            pointer-events: none;
+            z-index: -1;
+        }
+
+        @media (max-width: 768px) {
+            .container {
+                padding: 40px 16px;
+            }
+
+            .blog-title {
+                font-size: 1.55rem;
+            }
+
+            .essay-content {
+                font-size: 1.02rem;
+            }
+        }
+    </style>
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "BlogPosting",
+      "headline": "미디어 조형물 너머 흐릿하게 퍼지는 밤의 안개",
+      "datePublished": "2026-05-27T07:10:38+09:00",
+      "author": {
+        "@type": "Person",
+        "name": "도시의 비평가"
+      },
+      "publisher": {
+        "@type": "Organization",
+        "name": "디지털의 어둠"
+      },
+      "description": "상암동 디지털 미디어 시티의 환한 빌딩 숲과 어두운 골목길 경계에서 느껴지는 기묘한 고독과 찰나의 해방에 관한 일기."
     }
-    * { margin: 0; padding: 0; box-sizing: border-box; }
-    body {
-      background-color: var(--bg-color);
-      color: var(--text-color);
-      font-family: var(--font-swiss);
-      line-height: 1.8;
-      letter-spacing: -0.01em;
-      padding: 0 24px;
-    }
-    .container {
-      max-width: 900px;
-      margin: 0 auto;
-      padding: 60px 0;
-    }
-    header {
-      border-bottom: 1px solid var(--border-color);
-      padding-bottom: 24px;
-      margin-bottom: 40px;
-      display: flex;
-      justify-content: space-between;
-      align-items: flex-end;
-    }
-    .logo {
-      font-size: 1.25rem;
-      font-weight: 700;
-      text-transform: uppercase;
-      letter-spacing: 0.1em;
-      text-decoration: none;
-      color: var(--text-color);
-    }
-    nav { display: flex; gap: 20px; }
-    nav a {
-      color: var(--muted-color);
-      text-decoration: none;
-      font-size: 0.85rem;
-      text-transform: uppercase;
-      letter-spacing: 0.05em;
-      font-weight: 600;
-      transition: color 0.2s ease;
-    }
-    nav a:hover { color: var(--accent-color); }
-    main { padding-bottom: 60px; }
-    .meta-tag {
-      font-size: 0.75rem;
-      font-family: monospace;
-      text-transform: uppercase;
-      color: var(--accent-color);
-      font-weight: 700;
-      letter-spacing: 0.1em;
-      margin-bottom: 16px;
-      display: inline-block;
-    }
-    h1 {
-      font-size: 2.3rem;
-      font-weight: 700;
-      line-height: 1.3;
-      letter-spacing: -0.02em;
-      color: var(--text-color);
-      margin-bottom: 32px;
-    }
-    .content {
-      font-size: 1.05rem;
-      color: var(--text-color);
-      margin-bottom: 48px;
-      font-weight: 400;
-    }
-    .content p { margin-bottom: 20px; }
-    .juice-link {
-      color: var(--accent-color);
-      text-decoration: none;
-      border-bottom: 1px solid var(--accent-color);
-      font-weight: 600;
-      transition: all 0.2s ease;
-    }
-    .juice-link:hover {
-      background-color: rgba(37, 99, 235, 0.05);
-    }
-    .post-grid {
-      border-top: 1px solid var(--border-color);
-      padding-top: 40px;
-      margin-top: 40px;
-    }
-    .grid-title {
-      font-size: 0.85rem;
-      font-weight: 700;
-      text-transform: uppercase;
-      letter-spacing: 0.1em;
-      color: var(--muted-color);
-      margin-bottom: 24px;
-    }
-    .posts-list {
-      display: flex;
-      flex-direction: column;
-      gap: 16px;
-    }
-    .post-card {
-      border: 1px solid var(--border-color);
-      padding: 24px;
-      border-radius: 4px;
-      text-decoration: none;
-      color: var(--text-color);
-      transition: all 0.2s ease;
-    }
-    .post-card:hover {
-      border-color: var(--accent-color);
-      transform: translateY(-2px);
-    }
-    .post-card h3 {
-      font-size: 1.15rem;
-      font-weight: 600;
-      margin-bottom: 8px;
-    }
-    .post-card p {
-      font-size: 0.9rem;
-      color: var(--muted-color);
-      font-weight: 300;
-    }
-    footer {
-      border-top: 1px solid var(--border-color);
-      padding-top: 24px;
-      margin-top: 60px;
-      display: flex;
-      justify-content: space-between;
-      font-size: 0.8rem;
-      color: var(--muted-color);
-    }
-    footer a { color: var(--muted-color); text-decoration: none; }
-    footer a:hover { color: var(--accent-color); }
-    @media(max-width: 768px) {
-      header { flex-direction: column; align-items: flex-start; gap: 16px; }
-      h1 { font-size: 1.8rem; }
-    }
-  </style>
+    </script>
 </head>
 <body>
-  <div class="container">
-    <header>
-      <a href="/" class="logo">KR.GEEK</a>
-      <nav><a href="index.html">HOME</a> | <a href="sitemap.xml">SITEMAP</a></nav>
-    </header>
-    <main>
-      <div class="meta-tag">// SWISS ACCENTED GRID SYSTEM</div>
-      <h1>인문 철학 지식 저널 및 아카이브</h1>
-      <div class="content">
-        환영합니다. 본 블로그 공간은 세련되고 품격 있는 <strong>인문 철학</strong> 분야의 깊이 있는 전문 에세이와 실용 기술 논문을 공유하는 매니아 전용 아카이브 저널입니다. 아래의 최근 기사 목록을 통해 새로운 지식의 지평을 넓혀 보시기 바랍니다.
-      </div>
-      
-      
-      <div class="post-grid">
-        <div class="grid-title">Recent Post Archive</div>
-        <div class="posts-list">
-          
-        <a href="posts/normal-1.html" class="post-card">
-          <h3>바뤼흐 스피노자의 에티카(Ethica) 속 동물의 코나투스(Conatus)와 비주류 정서론 분석</h3>
-          <p>네덜란드의 고독한 렌즈 가공 철학자 스피노자의 주저 에티카에서 피력된 코나투스(자신의 존재를 유지하려는 영속적 본성 노력) 개념을 동물에게 투영해 볼 때, 인간 중심적 관점에서 해...</p>
-        </a>
-      
 
-        <a href="posts/normal-2.html" class="post-card">
-          <h3>질 들뢰즈의 리좀(Rhizome) 공간 역학으로 조망한 아날로그 골목길의 인문 구조학</h3>
-          <p>시작과 끝이 규정되지 않고 끊임없이 파편적으로 연결되며 영토를 가로지르는 들뢰즈의 리좀 모델을 격자형 대도시가 아닌 오랜 유기적 골목길의 공간 미학에 적용해 볼 때, 규칙적 구획이...</p>
-        </a>
-      
+    <div class="container">
+        <header class="blog-header">
+            <div class="lilac-glow"></div>
+            <div class="blog-sub">DIGITAL CITY MONOLOGUE</div>
+            <div class="blog-title">미디어 빌딩 숲에서 어둠의 골목으로 번지는 기묘한 고독</div>
+            <div class="blog-date">2026. 05. 27</div>
+        </header>
 
-        <a href="posts/normal-3.html" class="post-card">
-          <h3>중세 스콜라 철학의 영적 통신 논쟁: 천사들의 비물질적 메시지 전달 속도와 주파수</h3>
-          <p>중세 대철학자 토마스 아퀴나스가 주창했던 천사들의 언어(Speech of Angels) 형이상학은 물리적 육체와 공간의 장벽이 없는 순수한 지성적 존재들이 어떻게 공간을 왜곡하고 ...</p>
-        </a>
-      
+        <main class="essay-content">
+            <div class="essay-p">
+                수많은 모니터와 전광판이 밤하늘을 어지럽게 수놓으며 차가운 기계음을 내뿜는다. 상암의 한낮은 완벽하게 디지털화된 거대한 방송국과 화려한 미디어 조형물들이 가득 찬 조밀하고 건조한 미래적 공간이다. 숨 가쁘게 흘러가는 초 단위의 연출과 빈틈없는 모니터링 너머에서, 우리는 감정마저 차갑게 정돈되어가는 거대한 프레임의 중압감에 짓눌리곤 한다. 하지만 깊은 밤, 방송국의 전광판 불빛들이 서서히 흐릿해지고 어둠이 짙은 골목길을 덮어버릴 때 비로소 우리는 마음의 틈새를 찾아 움직이기 시작한다.
+            </div>
 
-        <a href="posts/juice-1.html" class="post-card">
-          <h3>지적 인문 철학 독자들을 위해 준비한 백링크 대행 사이트 통합 안내 리포트</h3>
-          <p>신과 만물의 필연적인 자기 보존 욕구와 중심을 인정하지 않는 무정형의 리좀적 골목길 사색을 거치며 시대의 심연을 정밀하게 성찰해 나가는 깊이 있는 지성인분들이라면, 거칠고 차가운 ...</p>
-        </a>
-      
+            <div class="essay-p">
+                디지털 단지의 거대한 마천루 너머, 조용하게 켜진 상업 지구 골목 구석의 희미한 연보랏빛 네온사인은 묘하게도 지친 마음의 빗장을 스르륵 풀어내린다. 강한 담배 연기와 함께 흘러나오던 미디어 기획자들의 거친 한숨 소리 사이로, 문득 아련하게 스쳐 지나간 상암 유흥 후기 같은 솔직하고 소박한 기록들은, 거친 광고나 조작된 비평이 아니라 차가운 모니터 숲을 헤매던 고단한 노동자들이 몸과 마음의 가시를 털어내고 잠시나마 유쾌하게 웃던 따스한 쉼터에 관한 아날로그식 다이어리와 같았다. 그것은 숨 막히는 촬영 현장이나 피 말리는 마감 끝에 홀가분하게 지인들과 소주잔을 부딪치며 마음의 그늘을 가볍게 지우고 나오던 시절의 그 소박하고 인간미 가득했던 진짜배기 일탈에 얽힌 포근하고 뭉클한 단상이었다.
+            </div>
 
-        <a href="posts/juice-2.html" class="post-card">
-          <h3>지적 인문 철학 독자들을 위해 준비한 백링크 대행 사이트 통합 안내 리포트</h3>
-          <p>신과 만물의 필연적인 자기 보존 욕구와 중심을 인정하지 않는 무정형의 리좀적 골목길 사색을 거치며 시대의 심연을 정밀하게 성찰해 나가는 깊이 있는 지성인분들이라면, 거칠고 차가운 ...</p>
-        </a>
+            <div class="highlight-quote">
+                <div class="quote-inner">
+                    "가장 정교하게 포장된 가상 공간에서도, 우리에게 진짜 살아있음을 주는 것은 결국 가공되지 않은 밤의 유대다."
+                </div>
+            </div>
+
+            <div class="essay-p">
+                빛나는 디지털 조형물의 환상적인 빛 그림자를 가만히 밟아보며 차가운 새벽바람을 맞고 걸어가는 길은 참으로 아늑하다. 매끄러운 통유리 빌딩들의 한가운데 t3b04-sa-night-rv 라는 나만의 조그만 기호를 남겨보며, 가상과 실제의 경계에서 건져 올린 오늘의 상암 밤거리 단상을 고요히 매듭짓는다.
+            </div>
+
+            <section class="comments">
+                <div class="comments-label">남긴 목소리</div>
+
+                <div class="comment-node">
+                    <div class="comment-meta">
+                        <span class="author-name">미디어종사자S</span>
+                        <span class="post-time">2026.05.27</span>
+                    </div>
+                    <div class="text-body">
+                        하루 종일 피 말리는 마감 작업 끝에 이 글을 읽는데 가슴 한구석이 찡해졌습니다. 미디어 단지의 삭막함 이면에 숨은 외로움을 너무나 섬세하게 그렸습니다.
+                    </div>
+                    <div class="stars">★ ★ ★ ★ ★</div>
+                </div>
+
+                <div class="comment-node">
+                    <div class="comment-meta">
+                        <span class="author-name">디지털노마드</span>
+                        <span class="post-time">2026.05.27</span>
+                    </div>
+                    <div class="text-body">
+                        인공적이고 기하학적인 조형물 숲과 소박한 뒷골목의 한잔이 주는 대비가 탁월합니다. 지친 밤에 마음을 편안하게 쉴 수 있는 명작 수필이네요.
+                    </div>
+                    <div class="stars">★ ★ ★ ★ ☆</div>
+                </div>
+
+                <div class="comment-node">
+                    <div class="comment-meta">
+                        <span class="author-name">상암골손</span>
+                        <span class="post-time">2026.05.27</span>
+                    </div>
+                    <div class="text-body">
+                        고풍스럽고 아름다운 보랏빛 글라스모피즘 스타일의 디자인과 고운 문체가 정말 매력적입니다. 오래도록 여운이 남을 것 같습니다.
+                    </div>
+                    <div class="stars">★ ★ ★ ★ ★</div>
+                </div>
+            </section>
+        </main>
+
+        
+
+
+<!-- PBN Recent Posts Feed Section -->
+<section class="recent-posts-section" aria-label="최신 글 피드" style="padding:60px 20px;background:#f7fafc;border-top:1px solid #e2e8f0;border-bottom:1px solid #e2e8f0">
+  <div style="max-width:1100px;margin:0 auto">
+    <h3 style="font-size:1.5rem;font-weight:800;color:#1a202c;text-align:center;margin-bottom:32px;letter-spacing:-0.025em">📝 최신 관련 포스트</h3>
+    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:24px">
       
-        </div>
-      </div>
-    </main>
-    <footer>
-      <div>&copy; 2026 KR.GEEK. ALL RIGHTS RESERVED.</div>
+    <article class="recent-post-card" style="background:#ffffff;border-radius:16px;padding:24px;box-shadow:0 4px 20px rgba(0,0,0,0.04);border:1px solid #edf2f7;transition:transform 0.3s ease,box-shadow 0.3s ease;display:flex;flex-direction:column;justify-content:space-between;min-height:220px" onmouseover="this.style.transform='translateY(-5px)';this.style.boxShadow='0 12px 24px rgba(0,0,0,0.08)'" onmouseout="this.style.transform='none';this.style.boxShadow='0 4px 20px rgba(0,0,0,0.04)'">
       <div>
-        <a href="sitemap.xml">SITEMAP</a> | 
-        <a href="#">PRIVACY</a> | 
-        <a href="#">DISCLAIMER</a>
+        <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:12px;font-size:0.8rem;color:#718096">
+          <span>💡 GUIDE</span>
+          <time datetime="2026-06-10">2026-06-10</time>
+        </div>
+        <h4 style="font-size:1.1rem;font-weight:700;color:#1a202c;margin-bottom:8px;line-height:1.4">유흥 해결 방법 총정리 — 전문가가 알려주는 5가지 팁</h4>
+        <p style="font-size:0.875rem;color:#4a5568;line-height:1.6;margin-bottom:16px;display:-webkit-box;-webkit-line-clamp:3;-webkit-box-orient:vertical;overflow:hidden;text-overflow:ellipsis">### 포스트 DNA 52d6551e #### 제목: 창작한 제목 | "단골 손님의 비밀: 홍대 상권 업소 폐업과 살아남은 차별화 전략" 아, 진짜... 서비스업계와 로컬 비즈니스 뒷이야기에서 깊숙한 곳으로 들어가보면, 자영업자의 평균 폐업률 통계 같은 지식을 완전히 </p>
       </div>
-    </footer>
+      <a href="posts/guide-001-1jn7rcx.html" style="align-self:flex-start;text-decoration:none;color:#3182ce;font-size:0.9rem;font-weight:600;transition:color 0.2s" onmouseover="this.style.color='#2b6cb0'" onmouseout="this.style.color='#3182ce'">자세히 보기 →</a>
+    </article>
+    <article class="recent-post-card" style="background:#ffffff;border-radius:16px;padding:24px;box-shadow:0 4px 20px rgba(0,0,0,0.04);border:1px solid #edf2f7;transition:transform 0.3s ease,box-shadow 0.3s ease;display:flex;flex-direction:column;justify-content:space-between;min-height:220px" onmouseover="this.style.transform='translateY(-5px)';this.style.boxShadow='0 12px 24px rgba(0,0,0,0.08)'" onmouseout="this.style.transform='none';this.style.boxShadow='0 4px 20px rgba(0,0,0,0.04)'">
+      <div>
+        <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:12px;font-size:0.8rem;color:#718096">
+          <span>⭐ REVIEW</span>
+          <time datetime="2026-05-24">2026-05-24</time>
+        </div>
+        <h4 style="font-size:1.1rem;font-weight:700;color:#1a202c;margin-bottom:8px;line-height:1.4">지적 인문 철학 독자들을 위해 준비한 백링크 대행 사이트 통합 안내 리포트</h4>
+        <p style="font-size:0.875rem;color:#4a5568;line-height:1.6;margin-bottom:16px;display:-webkit-box;-webkit-line-clamp:3;-webkit-box-orient:vertical;overflow:hidden;text-overflow:ellipsis"></p>
+      </div>
+      <a href="posts/juice-1.html" style="align-self:flex-start;text-decoration:none;color:#3182ce;font-size:0.9rem;font-weight:600;transition:color 0.2s" onmouseover="this.style.color='#2b6cb0'" onmouseout="this.style.color='#3182ce'">자세히 보기 →</a>
+    </article>
+    <article class="recent-post-card" style="background:#ffffff;border-radius:16px;padding:24px;box-shadow:0 4px 20px rgba(0,0,0,0.04);border:1px solid #edf2f7;transition:transform 0.3s ease,box-shadow 0.3s ease;display:flex;flex-direction:column;justify-content:space-between;min-height:220px" onmouseover="this.style.transform='translateY(-5px)';this.style.boxShadow='0 12px 24px rgba(0,0,0,0.08)'" onmouseout="this.style.transform='none';this.style.boxShadow='0 4px 20px rgba(0,0,0,0.04)'">
+      <div>
+        <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:12px;font-size:0.8rem;color:#718096">
+          <span>⭐ REVIEW</span>
+          <time datetime="2026-05-24">2026-05-24</time>
+        </div>
+        <h4 style="font-size:1.1rem;font-weight:700;color:#1a202c;margin-bottom:8px;line-height:1.4">지적 인문 철학 독자들을 위해 준비한 백링크 대행 사이트 통합 안내 리포트</h4>
+        <p style="font-size:0.875rem;color:#4a5568;line-height:1.6;margin-bottom:16px;display:-webkit-box;-webkit-line-clamp:3;-webkit-box-orient:vertical;overflow:hidden;text-overflow:ellipsis"></p>
+      </div>
+      <a href="posts/juice-2.html" style="align-self:flex-start;text-decoration:none;color:#3182ce;font-size:0.9rem;font-weight:600;transition:color 0.2s" onmouseover="this.style.color='#2b6cb0'" onmouseout="this.style.color='#3182ce'">자세히 보기 →</a>
+    </article>
+    <article class="recent-post-card" style="background:#ffffff;border-radius:16px;padding:24px;box-shadow:0 4px 20px rgba(0,0,0,0.04);border:1px solid #edf2f7;transition:transform 0.3s ease,box-shadow 0.3s ease;display:flex;flex-direction:column;justify-content:space-between;min-height:220px" onmouseover="this.style.transform='translateY(-5px)';this.style.boxShadow='0 12px 24px rgba(0,0,0,0.08)'" onmouseout="this.style.transform='none';this.style.boxShadow='0 4px 20px rgba(0,0,0,0.04)'">
+      <div>
+        <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:12px;font-size:0.8rem;color:#718096">
+          <span>⭐ REVIEW</span>
+          <time datetime="2026-05-24">2026-05-24</time>
+        </div>
+        <h4 style="font-size:1.1rem;font-weight:700;color:#1a202c;margin-bottom:8px;line-height:1.4">바뤼흐 스피노자의 에티카(Ethica) 속 동물의 코나투스(Conatus)와 비주류 정서론 분석</h4>
+        <p style="font-size:0.875rem;color:#4a5568;line-height:1.6;margin-bottom:16px;display:-webkit-box;-webkit-line-clamp:3;-webkit-box-orient:vertical;overflow:hidden;text-overflow:ellipsis"></p>
+      </div>
+      <a href="posts/normal-1.html" style="align-self:flex-start;text-decoration:none;color:#3182ce;font-size:0.9rem;font-weight:600;transition:color 0.2s" onmouseover="this.style.color='#2b6cb0'" onmouseout="this.style.color='#3182ce'">자세히 보기 →</a>
+    </article>
+    <article class="recent-post-card" style="background:#ffffff;border-radius:16px;padding:24px;box-shadow:0 4px 20px rgba(0,0,0,0.04);border:1px solid #edf2f7;transition:transform 0.3s ease,box-shadow 0.3s ease;display:flex;flex-direction:column;justify-content:space-between;min-height:220px" onmouseover="this.style.transform='translateY(-5px)';this.style.boxShadow='0 12px 24px rgba(0,0,0,0.08)'" onmouseout="this.style.transform='none';this.style.boxShadow='0 4px 20px rgba(0,0,0,0.04)'">
+      <div>
+        <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:12px;font-size:0.8rem;color:#718096">
+          <span>⭐ REVIEW</span>
+          <time datetime="2026-05-24">2026-05-24</time>
+        </div>
+        <h4 style="font-size:1.1rem;font-weight:700;color:#1a202c;margin-bottom:8px;line-height:1.4">질 들뢰즈의 리좀(Rhizome) 공간 역학으로 조망한 아날로그 골목길의 인문 구조학</h4>
+        <p style="font-size:0.875rem;color:#4a5568;line-height:1.6;margin-bottom:16px;display:-webkit-box;-webkit-line-clamp:3;-webkit-box-orient:vertical;overflow:hidden;text-overflow:ellipsis"></p>
+      </div>
+      <a href="posts/normal-2.html" style="align-self:flex-start;text-decoration:none;color:#3182ce;font-size:0.9rem;font-weight:600;transition:color 0.2s" onmouseover="this.style.color='#2b6cb0'" onmouseout="this.style.color='#3182ce'">자세히 보기 →</a>
+    </article>
+    <article class="recent-post-card" style="background:#ffffff;border-radius:16px;padding:24px;box-shadow:0 4px 20px rgba(0,0,0,0.04);border:1px solid #edf2f7;transition:transform 0.3s ease,box-shadow 0.3s ease;display:flex;flex-direction:column;justify-content:space-between;min-height:220px" onmouseover="this.style.transform='translateY(-5px)';this.style.boxShadow='0 12px 24px rgba(0,0,0,0.08)'" onmouseout="this.style.transform='none';this.style.boxShadow='0 4px 20px rgba(0,0,0,0.04)'">
+      <div>
+        <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:12px;font-size:0.8rem;color:#718096">
+          <span>⭐ REVIEW</span>
+          <time datetime="2026-05-24">2026-05-24</time>
+        </div>
+        <h4 style="font-size:1.1rem;font-weight:700;color:#1a202c;margin-bottom:8px;line-height:1.4">중세 스콜라 철학의 영적 통신 논쟁: 천사들의 비물질적 메시지 전달 속도와 주파수</h4>
+        <p style="font-size:0.875rem;color:#4a5568;line-height:1.6;margin-bottom:16px;display:-webkit-box;-webkit-line-clamp:3;-webkit-box-orient:vertical;overflow:hidden;text-overflow:ellipsis"></p>
+      </div>
+      <a href="posts/normal-3.html" style="align-self:flex-start;text-decoration:none;color:#3182ce;font-size:0.9rem;font-weight:600;transition:color 0.2s" onmouseover="this.style.color='#2b6cb0'" onmouseout="this.style.color='#3182ce'">자세히 보기 →</a>
+    </article>
+    <article class="recent-post-card" style="background:#ffffff;border-radius:16px;padding:24px;box-shadow:0 4px 20px rgba(0,0,0,0.04);border:1px solid #edf2f7;transition:transform 0.3s ease,box-shadow 0.3s ease;display:flex;flex-direction:column;justify-content:space-between;min-height:220px" onmouseover="this.style.transform='translateY(-5px)';this.style.boxShadow='0 12px 24px rgba(0,0,0,0.08)'" onmouseout="this.style.transform='none';this.style.boxShadow='0 4px 20px rgba(0,0,0,0.04)'">
+      <div>
+        <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:12px;font-size:0.8rem;color:#718096">
+          <span>⭐ REVIEW</span>
+          <time datetime="2026-06-01">2026-06-01</time>
+        </div>
+        <h4 style="font-size:1.1rem;font-weight:700;color:#1a202c;margin-bottom:8px;line-height:1.4">월매 3 천 찍고도 망한 그날, 상암동 밤거리에 버려진 영수증들의 비명</h4>
+        <p style="font-size:0.875rem;color:#4a5568;line-height:1.6;margin-bottom:16px;display:-webkit-box;-webkit-line-clamp:3;-webkit-box-orient:vertical;overflow:hidden;text-overflow:ellipsis">형님, 진짜 가슴이 미어지는 소리를 하나 해줄게. 2023 년 홍대 앞, 그 화려한 네온사인 뒤에 숨겨진 'POS 에러 코드 404' 같은 비극을 말이야. 다들 임대료 때문에 망했다고 하지만, 그건 표면적인 변명일 뿐이야. 진짜 원인은 '유동인구 환산율'이라는 착각에서</p>
+      </div>
+      <a href="posts/review-001.html" style="align-self:flex-start;text-decoration:none;color:#3182ce;font-size:0.9rem;font-weight:600;transition:color 0.2s" onmouseover="this.style.color='#2b6cb0'" onmouseout="this.style.color='#3182ce'">자세히 보기 →</a>
+    </article>
+    </div>
   </div>
+</section>
+<footer class="footer">
+            &copy; 2026 디지털의 어둠. All rights reserved.
+        </footer>
+    </div>
+
 </body>
 </html>
